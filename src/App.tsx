@@ -1,4 +1,10 @@
 
+import {Navbar} from './components/Navbar';
+import {ItemList} from './components/ItemList';
+import {ShoppingCart} from './components/ShoppingCart';
+import {ShoppingCartContext} from './context/ShoppingCartContext';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
 function App() {
   let saludo: string = "Hola mundo"
   console.log(saludo);
@@ -6,7 +12,15 @@ function App() {
 
   return (
     <>
-      <h1 className='text-red-500'>{saludo}</h1>
+      <ShoppingCartContext>
+        <Router>
+          <Navbar/>
+          <Routes>
+            <Route path='/' element ={<ItemList/>}/>
+            <Route path='/cart' element={<ShoppingCart/>}/>
+          </Routes>
+        </Router>
+      </ShoppingCartContext>
     </>
   )
 }
