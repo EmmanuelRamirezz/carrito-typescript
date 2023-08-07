@@ -1,0 +1,50 @@
+[
+	{
+		"id": 1,
+		"name": "Keyboard",
+		"price": 300,
+		"imgUrl": "https://i.imgur.com/2A0sRiW.jpg"
+	},
+	{
+		"id": 2,
+		"name": "Mouse",
+		"price": 100,
+		"imgUrl": "https://i.imgur.com/1qV2Zos.jpg"
+	},
+	{
+		"id": 3,
+		"name": "Monitor",
+		"price": 600,
+		"imgUrl": "https://i.imgur.com/mA5XdBG.png"
+	},
+	{
+		"id": 4,
+		"name": "Gamer PC",
+		"price": 2000,
+		"imgUrl": "https://i.imgur.com/soA45CQ.jpg"
+	},
+	{
+		"id": 5,
+		"name": "Gaming Chair",
+		"price": 400,
+		"imgUrl": "https://i.imgur.com/TvNLIFe.jpg"
+	},
+	{
+		"id": 6,
+		"name": "Headphones",
+		"price": 50,
+		"imgUrl": "https://i.imgur.com/2HlMJe0.jpg"
+	},
+	{
+		"id": 7,
+		"name": "Control",
+		"price": 60,
+		"imgUrl": "https://i.imgur.com/1iElIW8.jpg"
+	},
+	{
+		"id": 8,
+		"name": "GPU",
+		"price": 3000,
+		"imgUrl": "https://i.imgur.com/oUS4FAd.jpg"
+	}
+]
