@@ -22,7 +22,6 @@ export const ShoppingCart = () => {
   const [endToggle, setEndToggle] = useState(false)
 
   const [visible, setVisible] = useState(false)
-  console.log(visible);
   
     // const end = document.getElementById('end');
     // setEndToggle(!endToggle)

@@ -1,12 +1,13 @@
 import storeItems from '../data/products.json'
 import {Item} from './Item';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CartContext } from '../context/ShoppingCartContext';
 type current = {
   quantity: number,
   price: number,
 }
+
 export const ItemList = () => {
   const contextValue = useContext(CartContext);
   if (contextValue === null) {

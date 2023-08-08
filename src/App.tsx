@@ -6,10 +6,6 @@ import {ShoppingCartContext} from './context/ShoppingCartContext';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
-  let saludo: string = "Hola mundo"
-  console.log(saludo);
-  
-
   return (
     <>
       <ShoppingCartContext>
