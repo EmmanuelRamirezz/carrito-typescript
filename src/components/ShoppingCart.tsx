@@ -12,6 +12,9 @@ export const ShoppingCart = () => {
   }
   const { cart, setCart } = contextValue;
 
+  console.log(cart);
+  
+
   const quantity:number = cart.reduce((acumulacion:number, current:current):number => {
     return acumulacion + current.quantity; 
    }, 0)

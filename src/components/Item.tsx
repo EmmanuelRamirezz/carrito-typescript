@@ -1,19 +1,26 @@
 import { CartContext } from "../context/ShoppingCartContext"
 import { useContext } from "react";
 //tipos de todos los items
-type AppProps = {
-  id: number,
-  name: string,
-  price: number,
-  imgUrl: string,
-};
+// type AppProps = {
+//   id: number,
+//   name: string,
+//   price: number,
+//   imgUrl: string,
+// };
+type Products={
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  rating: {[key:string]:string};
+}
 //tipos de los items actuales:
 type CurrentItems = {
   id: number,
-  name: string,
-  quantity: number,
+  title: string,
+  quantity: number;
 }
-export const Item = ({ id, name, price, imgUrl }: AppProps) => {
+export const Item = ({ id, title, price, image, rating }: Products) => {
   const contextValue = useContext(CartContext);
   if (contextValue === null) {
     return <div>Loading...</div>;
@@ -26,20 +33,25 @@ export const Item = ({ id, name, price, imgUrl }: AppProps) => {
       //Busca en el carrito si el profucto seleccionado se encuentrá ahí. id es el producto seleccionado
       const isItemsFound = currItems.find((item: CurrentItems) => item.id == id);
       //Si el producto ya estaba, entonces retorna un nuevo arreglo
+    
+      
       if (isItemsFound) {
         //Busca en el el carrito el producto que se seleccionó
+        console.log(currItems);
         return currItems.map((item) => {
           //Confirma que si se encontró al verificar el id
           if (item.id === id) {
             //le agrega +1 a la propiedad quantity
             return { ...item, quantity: item.quantity + 1 };
           } else {
+            console.log(currItems);
             return item;
           }
         });
       } else {
+        console.log(currItems);
         //Si el producto seleccionado no está en el carrito entonces copia los productos que ya estaban y agregamos el nuevo producto seleccionado con su respectivo id, precio y le añadimos la propiedad quantity con valor 1
-        return [...currItems, { id, name, quantity: 1, price }];
+        return [...currItems, { id, title, price, image, rating }];
       }
     });
   };
@@ -65,7 +77,7 @@ export const Item = ({ id, name, price, imgUrl }: AppProps) => {
   };
   const getQuantityById = (id: number) => {
     // Busca en el carrito un elemento que coincida con el id que mandamos. Y si esto nos retorna algo, vamos a extraer la cantidad sino nos debe retornar 0
-    return cart.find((item: AppProps) => item.id === id)?.quantity || 0;
+    return cart.find((item: CurrentItems) => item.id === id)?.quantity || 0;
   };
   const quantityPerItem = getQuantityById(id);
   return (
@@ -75,15 +87,15 @@ export const Item = ({ id, name, price, imgUrl }: AppProps) => {
       </div>
       <div className="h-36 w-36 m-auto">
         <img
-          src={imgUrl}
-          alt={name}
+          src={image}
+          alt={title}
           width='150'
           className="m-auto object-fit w-36 h-32"
         />
       </div>
 
       <div className="flex justify-around items-center mt-4">
-        <div>{name}</div>
+        <div>{title}</div>
         <div>
           <p className="text-center">3.9 ⭐️</p>
           <p>120 Reviews</p>
