@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/ShoppingCartContext";
 import { redirect } from "react-router-dom";
+
 type current = {
+  title:string;
   quantity: number,
   price: number,
 }
@@ -16,8 +18,9 @@ export const ShoppingCart = () => {
   
 
   const quantity:number = cart.reduce((acumulacion:number, current:current):number => {
-    return acumulacion + current.quantity; 
+    return acumulacion + current.price; 
    }, 0)
+
 
    const totalPrice = cart.reduce((acumulador:number, current:current):number => {
     return acumulador + current.quantity * current.price;
@@ -37,16 +40,18 @@ export const ShoppingCart = () => {
   
   return(
     <section>
-      <div className='w-52 mx-auto mt-40 rounded-2xl bg-slate-300 p-4'>
+      <div className='w-52 mx-auto mt-20 rounded-2xl bg-slate-300 p-4'>
         <div>
           <h2 className="text-xl font-bold pb-4">Items in cart: {quantity}</h2>
         </div>
         <div>
           {cart.map((item) => {
              return (
-              <div key={item.id} className="mx-auto py-2">
-                {item.quantity}<span> </span>{item.name}<span>: </span>
-                {item.price * item.quantity}$             
+              <div key={item.id} className="mx-auto py-4">
+                <p>{item.quantity}<span> </span>{item.title}<span>: </span></p>
+                <p>{item.price * item.quantity}$ </p>
+
+            
               </div>
              )  
           })}

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { CartContext } from '../context/ShoppingCartContext';
 import { Jelly } from '@uiball/loaders'
+
 type current = {
   quantity: number,
   price: number,
@@ -15,10 +16,9 @@ export const ItemList = () => {
   }
   const { cart, setCart, product, loading } = contextValue;
 
-  const quantity: number = cart.reduce((acumulacion: number, current: current): number => {
-    console.log(acumulacion, current);
-    return acumulacion + current.quantity;
-  }, 0)  
+  
+  
+  const quantity: number = cart.reduce((acumulacion: number, current: current): number => { return acumulacion + current.quantity;}, 0)  
   
   
 

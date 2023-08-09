@@ -37,7 +37,6 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
       
       if (isItemsFound) {
         //Busca en el el carrito el producto que se seleccionó
-        console.log(currItems);
         return currItems.map((item) => {
           //Confirma que si se encontró al verificar el id
           if (item.id === id) {
@@ -49,9 +48,8 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
           }
         });
       } else {
-        console.log(currItems);
         //Si el producto seleccionado no está en el carrito entonces copia los productos que ya estaban y agregamos el nuevo producto seleccionado con su respectivo id, precio y le añadimos la propiedad quantity con valor 1
-        return [...currItems, { id, title, price, image, rating }];
+        return [...currItems, { id, price, title, quantity:1 }];
       }
     });
   };
@@ -77,7 +75,7 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
   };
   const getQuantityById = (id: number) => {
     // Busca en el carrito un elemento que coincida con el id que mandamos. Y si esto nos retorna algo, vamos a extraer la cantidad sino nos debe retornar 0
-    return cart.find((item: CurrentItems) => item.id === id)?.quantity || 0;
+    return cart.find((item: Products) => item.id === id)?.quantity || 0;
   };
   const quantityPerItem = getQuantityById(id);
   return (
@@ -97,8 +95,8 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
       <div className="flex justify-around items-center mt-4">
         <div>{title}</div>
         <div>
-          <p className="text-center">3.9 ⭐️</p>
-          <p>120 Reviews</p>
+          <p className="text-center">{rating.rate} ⭐️</p>
+          <p>{rating.count}👥</p>
         </div>
         {/*  */}
       </div>
