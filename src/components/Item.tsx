@@ -18,6 +18,7 @@ type Products={
 type CurrentItems = {
   id: number,
   title: string,
+  image: string,
   quantity: number;
 }
 export const Item = ({ id, title, price, image, rating }: Products) => {
@@ -43,13 +44,12 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
             //le agrega +1 a la propiedad quantity
             return { ...item, quantity: item.quantity + 1 };
           } else {
-            console.log(currItems);
             return item;
           }
         });
       } else {
         //Si el producto seleccionado no está en el carrito entonces copia los productos que ya estaban y agregamos el nuevo producto seleccionado con su respectivo id, precio y le añadimos la propiedad quantity con valor 1
-        return [...currItems, { id, price, title, quantity:1 }];
+        return [...currItems, { id, price, title, image, quantity:1 }];
       }
     });
   };
@@ -79,7 +79,7 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
   };
   const quantityPerItem = getQuantityById(id);
   return (
-    <div className="border-2 p-5" title="descripcion del producto">
+    <div className="border-2 p-5">
       <div className={`mx-auto mb-4 text-center text-white w-10  rounded-xl font-bold ${quantityPerItem >0 ? 'bg-orange-300':'bg-white'}`}>
         {quantityPerItem}
       </div>

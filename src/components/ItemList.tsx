@@ -1,9 +1,9 @@
-
 import { Item } from './Item';
 import { Link } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../context/ShoppingCartContext';
-import { Jelly } from '@uiball/loaders'
+import { Jelly } from '@uiball/loaders';
+import { FilterBar } from './FilterBar';
 
 type current = {
   quantity: number,
@@ -14,15 +14,8 @@ export const ItemList = () => {
   if (contextValue === null) {
     return <div>Loading...</div>;
   }
-  const { cart, setCart, product, loading } = contextValue;
-
-  
-  
+  const { cart, product, loading } = contextValue;
   const quantity: number = cart.reduce((acumulacion: number, current: current): number => { return acumulacion + current.quantity;}, 0)  
-  
-  
-
-  
   return (
     <>
       {
@@ -37,6 +30,7 @@ export const ItemList = () => {
           </div>
           :
           <div className='w-11/12 mx-auto pt-8'>
+            <FilterBar/>
             <div className='grid grid-cols-4 grid-flow-row gap-4 max-md:grid-cols-2 max-sm:grid-cols-1'>
               {product.map((product) => {
                 return <Item key={product.id} {...product} />
