@@ -7,8 +7,9 @@ type Products={
     price: number;
     image: string;
     rating: {[key:string]:string};
+    description: string;
 }
-//tipo de dato del contexto
+//Tipo de dato del contexto
 type CartContextType = {
   cart: any[];
   setCart: React.Dispatch<React.SetStateAction<any[]>>;
@@ -16,9 +17,12 @@ type CartContextType = {
   loading: boolean;
   category: string;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
+  productQuantity: number;
+  setProductQuantity: React.Dispatch<React.SetStateAction<number>>;
 };
 //creamos el contexto
 export const CartContext = createContext<CartContextType | null>(null);
+
 //funcion principal
 export const ShoppingCartContext = ({children}:{children: React.ReactNode}) => {
   //asignacion de valores del carrito
@@ -29,21 +33,24 @@ export const ShoppingCartContext = ({children}:{children: React.ReactNode}) => {
   const [loading, setLoading] = useState<boolean>(true);
   //asignacion de las categorías
   const [category, setCategory] = useState<string>(''); 
-  //llamado a la api
+  //asignaciond de la cantidad de los productos
+  const [productQuantity, setProductQuantity] = useState<number>(0)
+  //quantity en items y products
+
+  //llamado a la api ()
       useEffect(() => {
         fetch(`https://fakestoreapi.com/products/${category}`)
             .then(response => response.json())
             .then(data => {
                 //console.log(data),
-                setProduct(data),
+                setProduct(data)
                 setLoading(false)
             })
             .catch(e => console.log('Ha surgido un error '+e)
             )
-      }, [category]);
-
+      }, [category]);   
   return (
-    <CartContext.Provider value={{cart, setCart, product, loading, category, setCategory}}> 
+    <CartContext.Provider value={{cart, setCart, product, loading, category, setCategory, productQuantity, setProductQuantity}}> 
       {children}
     </CartContext.Provider>
   )

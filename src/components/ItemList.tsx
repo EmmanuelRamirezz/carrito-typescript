@@ -37,6 +37,7 @@ export const ItemList = () => {
                 {/* Los 3 puntos significa que le estoy pasando todas las propiedades de product */ }
               })}
             </div>
+            
             <ul className="my-auto text-lg text-white">
               <Link to={"/cart"}>
                 <li className='text-black'>

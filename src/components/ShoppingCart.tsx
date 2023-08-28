@@ -18,7 +18,7 @@ export const ShoppingCart = () => {
 
 
    const totalPrice = cart.reduce((acumulador:number, current:current):number => {
-    return acumulador + current.quantity * current.price;
+    return acumulador + (current.quantity * current.price);
   }, 0);
   const [visible, setVisible] = useState(false)
     // const end = document.getElementById('end');
@@ -45,7 +45,7 @@ export const ShoppingCart = () => {
                   <img 
                   src={item.image}
                   alt={item.title}
-                  className="rounded-full m-auto object-fit w-20"
+                  className="rounded-full m-auto object-fit w-20 h-20"
                   width={100}
                   height={100}
                   />
@@ -55,13 +55,12 @@ export const ShoppingCart = () => {
                   <div className="flex mx-4"><p> Product: </p><p className="font-bold ml-2">{item.title}</p></div>
                   <div className=" flex"><p>Price:</p><p className="font-bold ml-2">{item.price * item.quantity}$</p></div>       
                 </div>
-                
               </div>
              )  
           })}
         </div>
         <div className="text-xl font-bold pt-4 text-right max-md:text-center">
-          Total: {totalPrice} $
+          Total: {totalPrice.toFixed(2)} $
         </div>
 
         <button  className ='block mx-auto bg-yellow-200 p-2 rounded-md mt-6 font-bold'  onClick={() => setVisible(!visible)}>

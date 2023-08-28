@@ -4,7 +4,7 @@ import {ItemList} from './components/ItemList';
 import {ShoppingCart} from './components/ShoppingCart';
 import {ShoppingCartContext} from './context/ShoppingCartContext';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { Search } from './components/Search';
+import { Product } from './components/Product';
 
 function App() {
   return (
@@ -15,9 +15,8 @@ function App() {
           <Routes>
             <Route path='/' element ={<ItemList/>}/>
             <Route path='/cart' element={<ShoppingCart/>}/>
-            <Route path='/search' element={<Search/>}></Route>
+            <Route path='/products/:ids' element = {<Product/>}/>
           </Routes>
-
         </Router>
       </ShoppingCartContext>
     </>
