@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { CartContext } from '../context/ShoppingCartContext';
 import { useContext } from 'react';
+import storeLogo from '../assets/carts.png'
 type current = {
   quantity: number,
   price: number,
@@ -20,11 +21,12 @@ export const Navbar = () => {
   }, 0)
   //Reset Categories
   return (
-    <div>
+    <div className='sticky top-0'>
       <nav className="flex justify-between w-full h-24 px-10 bg-slate-500" >
         {/* Boton que nos redirige al home */}
         <Link to={"/"} className="my-auto text-2xl font-bold text-white" onClick={() => setCategory(``)}>
           <h2>
+            <img src={storeLogo} alt="Store logo" className='w-12 mx-auto' />
             Store Logo
           </h2>
         </Link>

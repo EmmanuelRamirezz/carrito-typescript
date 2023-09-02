@@ -1,41 +1,34 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../context/ShoppingCartContext"
+//tipos de los props que recibe
 type Products = {
   id: number;
   title: string;
   price: number;
   image: string;
-  rating: { [key: string]: string };
 }
 //tipos de los items actuales:
 type CurrentItems = {
   id: number,
   title: string,
+  price: number,
   image: string,
   quantity: number;
 }
 
-export const Buttons: React.FC<Products> = ({ id, title, price, image, rating }) => {
+export const Buttons: React.FC<Products> = ({ id, title, price, image }) => {
   // Código del componente hijo
-  console.log(typeof(id));
-  
-
-
-
   const contextValue = useContext(CartContext);
   if (contextValue === null) {
     return <div>Loading...</div>;
   }
-  const { cart, setCart, setProductQuantity } = contextValue;
-
+  const { cart, setCart, productQuantity, setProductQuantity } = contextValue;
   const addToCart = () => {
     //setCart puede recibir funciones como parametro. [Verifica si el producto agregado ya estaba en el carrito]
     setCart((currItems: CurrentItems[]) => {
       //Busca en el carrito si el profucto seleccionado se encuentrá ahí. id es el producto seleccionado
       const isItemsFound = currItems.find((item: CurrentItems) => item.id == id);
       //Si el producto ya estaba, entonces retorna un nuevo arreglo
-
-
       if (isItemsFound) {
         //Busca en el el carrito el producto que se seleccionó
         return currItems.map((item) => {
@@ -76,23 +69,27 @@ export const Buttons: React.FC<Products> = ({ id, title, price, image, rating })
     // Busca en el carrito un elemento que coincida con el id que mandamos. Y si esto nos retorna algo, vamos a extraer la cantidad sino nos debe retornar 0
     return cart.find((item: Products) => item.id === id)?.quantity || 0;
   };
-  const quantityPerItem = getQuantityById(id);
-  setProductQuantity(quantityPerItem)
+  useEffect(() => {
+    setProductQuantity(getQuantityById(id))
+  }, [cart])
   return (
     <div>
-      <div className={`mx-auto my-4 text-center text-white w-10  rounded-xl font-bold ${quantityPerItem > 0 ? 'bg-orange-300' : 'bg-white'}`}>
-          {quantityPerItem}
-        </div>
+      <div className={`mt-4 text-center w-10  rounded-xl ${productQuantity > 0 ? 'text-black' : 'text-white'}`}>
+        <p>Quantity:</p>
+        <p className="font-bold">{productQuantity}</p>
+      </div>
       {/*Mostramos el boton de Add to cart si no lo tenemos en el carrito. Y si ya lo tenemos debe de mostrar Add more*/}
       {
-        quantityPerItem === 0 ? (
-          <button className="bg-green-400 py-2 px-4 mt-8 rounded-3xl text-white hover:bg-green-500 "
-            onClick={() => addToCart()} >
-            Add to cart
-          </button>
+        productQuantity === 0 ? (
+          <div>
+            <button className="bg-green-400 py-2 px-4 mt-8 rounded-3xl text-white hover:bg-green-500 "
+              onClick={() => addToCart()} >
+              Add to cart
+            </button>
+          </div>
         ) :
           (
-            <button className="bg-blue-400 py-2 px-4 mt-8 mr-4 rounded-3xl text-white"
+            <button className="bg-blue-400 py-2 px-4 mt-8 mr-4 rounded-3xl text-white hover:bg-blue-500"
               onClick={() => addToCart()} >
               Add more
             </button>
@@ -100,7 +97,7 @@ export const Buttons: React.FC<Products> = ({ id, title, price, image, rating })
       }
       {/* Muestra el siguiente botton si la cantidad del elemento es mayor a 0 */}
       {
-        quantityPerItem > 0 && <button className="bg-red-400 py-2 px-4 mt-8  rounded-3xl text-white" onClick={() => removeItem(id)}>
+        productQuantity > 0 && <button className="bg-red-400 py-2 px-4 mt-8 rounded-3xl text-white hover:bg-red-500" onClick={() => removeItem(id)}>
           Substract item
         </button>
       }

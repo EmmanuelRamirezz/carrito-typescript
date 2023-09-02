@@ -1,7 +1,4 @@
-import { CartContext } from "../context/ShoppingCartContext"
-import { useContext } from "react";
-import { Product } from "./Product";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Buttons } from "./Buttons";
 //tipos de todos los items
 // type AppProps = {
@@ -17,9 +14,7 @@ type Products = {
   image: string;
   rating: { [key: string]: string };
 }
-
 export const Item = ({ id, title, price, image, rating }: Products) => {
-  
   return (
     <div className="border-2 p-5">
       <Link to={`products/${id}`} className="hover:cursor-pointer" >
@@ -32,7 +27,6 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
             className="m-auto object-fit w-36 h-32"
           />
         </div>
-
         <div className="flex justify-around items-center mt-4 h-52">
           <div>{title}</div>
           <div>
@@ -43,7 +37,9 @@ export const Item = ({ id, title, price, image, rating }: Products) => {
         </div>
       </Link>
       <div className="flex justify-center text-lg font-bold mt-4"><p>{price}$</p></div>
-      <Buttons id={id}  title={title} price={price} image={image} rating={rating}/>
+
+
+      <Buttons id={id} title={title} price={price} image={image} />
     </div>
 
   )
